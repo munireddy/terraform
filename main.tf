@@ -1,8 +1,8 @@
 # To Create a Security group 
 # Add a tag to the security group
 provider "aws" {
-  region                  = "${var.region}"
-  #shared_credentials_file = "$HOME/.aws/credentials"
+  region                  = "var.region"
+  shared_credentials_file = "$HOME/.aws/credentials"
   profile                 = "default"
 }
 
