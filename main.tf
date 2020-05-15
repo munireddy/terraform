@@ -7,7 +7,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "allow_ssh" {
-  name = "sg01FromTfModified"
+  name = "sg01FromTfModified3"
   description = "Allow ssh inbound traffic"
 
   ingress {
