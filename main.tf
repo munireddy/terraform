@@ -1,33 +1,42 @@
-# To Create a Security group 
-# Add a tag to the security group
+# Common change for tf12 .. remove $ and double quotes for  all veriable interpolations
 provider "aws" {
-  region                  = "var.region"
-  shared_credentials_file = "$HOME/.aws/credentials"
-  profile                 = "default"
+   region = var.region
 }
 
-resource "aws_security_group" "allow_ssh" {
-  name = "sg01FromTfModified3"
-  description = "Allow ssh inbound traffic"
-
-  ingress {
-      from_port = 22
-      to_port = 22
-      protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+terraform {
+  backend "s3" {
+    bucket = "cloudzenixtfstatefiles03012020"
+    #key    = "tfstatefiles/terraform.tfstate"
+    key    = "project1/terraform.tfstate"
+    region = "us-east-2"
   }
+}
+
+resource "aws_instance" "cZServers" {
+  #ami = "ami-5e8bb23b"
+  ami = lookup(var.amiid, var.region)
+  instance_type = "t2.micro"
+  count = var.instance_count
+  vpc_security_group_ids = ["${var.security_group}"]
+
+  key_name = var.key_name
+  
+  user_data = file("user-data.txt")
+  #Changed for tf12
   tags = {
-     Name = "sshPort22SecGroup"
+    Name = "My-terraformInst--${count.index + 1}"
   }
+
 }
 
-output "SecurityGroupId" {
-    value = "${aws_security_group.allow_ssh.id}"
+output "public_ip" {
+#value = "${aws_instance.cZServers.public_ip}"
+  value = "${formatlist("%v", aws_instance.cZServers.*.public_ip)}"
 }
 
-output "regionname"{
-    value = "${var.region}"
+resource "null_resource" "myPublicIps" {
+count = var.instance_count
+provisioner "local-exec" {
+      command = "echo '${element(aws_instance.cZServers.*.public_ip, count.index)}' >> hosts1"
 }
-output "SampelString"{
-    value = "Hello World!"
 }
