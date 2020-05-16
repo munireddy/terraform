@@ -36,7 +36,7 @@ output "public_ip" {
 }
 
 resource "null_resource" "myPublicIps" {
-count = var.instance_count
+count = "${var.instance_count}"
 provisioner "local-exec" {
       command = "echo '${element(aws_instance.cZServers.*.public_ip, count.index)}' >> hosts1"
 }
