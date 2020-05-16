@@ -1,7 +1,6 @@
 # Common change for tf12 .. remove $ and double quotes for  all veriable interpolations
 provider "aws" {
-   #region = "${var.region}"
-   region = "us-east-2"
+   region = "${var.region}"
 }
 
 terraform {
