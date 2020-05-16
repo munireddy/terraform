@@ -20,7 +20,7 @@ resource "aws_instance" "cZServers" {
   count = "${var.instance_count}"
   vpc_security_group_ids = ["${var.security_group}"]
 
-  key_name = var.key_name
+  key_name = "${var.key_name}"
   
   user_data = file("user-data.txt")
   #Changed for tf12
