@@ -14,7 +14,7 @@ terraform {
 
 resource "aws_instance" "cZServers" {
   #ami = "ami-5e8bb23b"
-  ami = lookup(var.amiid, var.region)
+  ami = "ami-5e8bb23b"
   instance_type = "t2.micro"
   count = var.instance_count
   vpc_security_group_ids = ["${var.security_group}"]
