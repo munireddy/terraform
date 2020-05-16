@@ -1,7 +1,8 @@
 # Common change for tf12 .. remove $ and double quotes for  all veriable interpolations
 provider "aws" {
    region = var.region
-   shared_credentials_file = "/home/ubuntu/.aws/credentials"
+   access_key = "AKIAIUMEXZLIS57XW4XA"
+   secret_access = "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"
 }
 
 terraform {
