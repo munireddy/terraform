@@ -22,7 +22,7 @@ resource "aws_instance" "cZServers" {
 
   key_name = "${var.key_name}"
   
-  user_data = file("user-data.txt")
+  user_data = "${file("user-data.txt")}"
   #Changed for tf12
   tags = {
     Name = "My-terraformInst--${count.index + 1}"
