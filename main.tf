@@ -1,11 +1,16 @@
 # Common change for tf12 .. remove $ and double quotes for  all veriable interpolations
 provider "aws" {
    region = var.region
-   #access_key = "MAKIAIUMEXZLIS57XW4XA1"
-   #secret_access = "MHfsRpjJR0CHXgPg1UzL8/g+DDytjntMno8dNbXTA2"
+  
 }
-
-
+terraform {
+  backend "s3" {
+    bucket = "cloudzenixtfstatefiles03012020"
+    #key    = "tfstatefiles/terraform.tfstate"
+    key    = "project1/terraform.tfstate"
+    region = "us-east-2"
+  }
+}
 
 resource "aws_instance" "cZServers" {
   #ami = "ami-5e8bb23b"
