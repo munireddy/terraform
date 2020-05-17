@@ -1,6 +1,6 @@
 # Common change for tf12 .. remove $ and double quotes for  all veriable interpolations
 provider "aws" {
-   version = "12.25"
+   version = "~> 2.0"
    region = "us-east-2"
    profile = "default"
   
