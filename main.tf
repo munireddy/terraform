@@ -3,8 +3,9 @@ provider "aws" {
    version = "~> 2.1"
    region = "us-east-2"
    profile = "default"
-   access_key = var.my-access-key
-   secret_key = var.my-secret-key
+   assume_role {
+    role_arn     = "arn:aws:iam::978322299160:role/ec2s3"
+   }
 }
 
 terraform {
