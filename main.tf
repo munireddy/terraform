@@ -3,8 +3,10 @@ provider "aws" {
    version = "~> 2.1"
    region = "us-east-2"
    profile = "default"
-  
+   access_key = var.my-access-key
+   secret_key = var.my-secret-key
 }
+
 terraform {
   backend "s3" {
     bucket = "cloudzenixtfstatefiles03012020"
