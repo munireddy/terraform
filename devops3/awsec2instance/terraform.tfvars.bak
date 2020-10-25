@@ -1,0 +1,4 @@
+
+variable key_name = "cZSecurityKey01.pem"
+
+variable private_key_path = "/home/ubuntu/.ssh/cZSecurityKey01.pem"
